@@ -1,5 +1,6 @@
 import { useCycleContext } from '../../context/CycleContext';
 import { Card } from '../common/Card';
+import { safeToFixed } from '../../utils/formatters';
 
 /**
  * Alert Panel Component
@@ -17,8 +18,8 @@ export function AlertPanel() {
   }
 
   const { alert_details, warning_count, protection_count } = currentCycle;
-  const warnings = alert_details.warnings || [];
-  const protections = alert_details.protections || [];
+  const warnings = alert_details?.warnings || [];
+  const protections = alert_details?.protections || [];
   const hasAlerts = warnings.length > 0 || protections.length > 0;
 
   return (
@@ -233,13 +234,13 @@ export function AlertPanel() {
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg Temp</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.average_temperature.toFixed(1)}°C
+            {safeToFixed(currentCycle.average_temperature, 1)}°C
           </p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg Voltage</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.voltage_avg.toFixed(1)}V
+            {safeToFixed(currentCycle.voltage_avg, 1)}V
           </p>
         </div>
       </div>
