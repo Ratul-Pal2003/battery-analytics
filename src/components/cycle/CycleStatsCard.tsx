@@ -52,7 +52,7 @@ export function CycleStatsCard() {
             </svg>
           </div>
           <p className="text-2xl font-bold text-purple-900">
-            {currentCycle.cycle_duration_hours.toFixed(1)}
+            {(currentCycle.cycle_duration_hours ?? 0).toFixed(1)}
           </p>
           <p className="text-xs text-purple-700 mt-1">hours</p>
         </div>
@@ -76,7 +76,7 @@ export function CycleStatsCard() {
             </svg>
           </div>
           <p className="text-2xl font-bold text-red-900">
-            {currentCycle.soh_drop.toFixed(2)}%
+            {(currentCycle.soh_drop ?? 0).toFixed(2)}%
           </p>
           <p className="text-xs text-red-700 mt-1">health decrease</p>
         </div>
@@ -100,10 +100,10 @@ export function CycleStatsCard() {
             </svg>
           </div>
           <p className="text-2xl font-bold text-green-900">
-            {currentCycle.average_soc.toFixed(1)}%
+            {(currentCycle.average_soc ?? 0).toFixed(1)}%
           </p>
           <p className="text-xs text-green-700 mt-1">
-            {currentCycle.min_soc.toFixed(0)}% - {currentCycle.max_soc.toFixed(0)}% range
+            {(currentCycle.min_soc ?? 0).toFixed(0)}% - {(currentCycle.max_soc ?? 0).toFixed(0)}% range
           </p>
         </div>
 
@@ -126,7 +126,7 @@ export function CycleStatsCard() {
             </svg>
           </div>
           <p className="text-2xl font-bold text-orange-900">
-            {currentCycle.average_temperature.toFixed(1)}°C
+            {(currentCycle.average_temperature ?? 0).toFixed(1)}°C
           </p>
           <p className="text-xs text-orange-700 mt-1">battery pack temp</p>
         </div>
@@ -157,19 +157,19 @@ export function CycleStatsCard() {
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium">Distance</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.total_distance.toFixed(1)} km
+            {(currentCycle.total_distance ?? 0).toFixed(1)} km
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium">Avg Speed</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.average_speed.toFixed(1)} km/h
+            {(currentCycle.average_speed ?? 0).toFixed(1)} km/h
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium">Max Speed</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.max_speed.toFixed(1)} km/h
+            {(currentCycle.max_speed ?? 0).toFixed(1)} km/h
           </p>
         </div>
         <div className="text-center">
@@ -187,19 +187,19 @@ export function CycleStatsCard() {
           <div>
             <p className="text-xs text-blue-700">Average</p>
             <p className="text-lg font-bold text-blue-900 mt-1">
-              {currentCycle.voltage_avg.toFixed(2)}V
+              {(currentCycle.voltage_avg ?? 0).toFixed(2)}V
             </p>
           </div>
           <div>
             <p className="text-xs text-blue-700">Minimum</p>
             <p className="text-lg font-bold text-blue-900 mt-1">
-              {currentCycle.voltage_min.toFixed(2)}V
+              {(currentCycle.voltage_min ?? 0).toFixed(2)}V
             </p>
           </div>
           <div>
             <p className="text-xs text-blue-700">Maximum</p>
             <p className="text-lg font-bold text-blue-900 mt-1">
-              {currentCycle.voltage_max.toFixed(2)}V
+              {(currentCycle.voltage_max ?? 0).toFixed(2)}V
             </p>
           </div>
         </div>
