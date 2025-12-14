@@ -74,8 +74,19 @@ export const batteryService = {
       return snapshots[snapshots.length - 1];
     }
 
-    const response = await apiClient.get<CycleSnapshot>(API_ENDPOINTS.LATEST(imei));
-    return response.data;
+    const response = await apiClient.get<{ success: boolean; data: any }>(API_ENDPOINTS.LATEST(imei));
+    const cycleData = response.data.data;
+
+    // Parse alert_details if it's a string
+    if (typeof cycleData.alert_details === 'string') {
+      try {
+        cycleData.alert_details = JSON.parse(cycleData.alert_details);
+      } catch (e) {
+        cycleData.alert_details = { warnings: [], protections: [] };
+      }
+    }
+
+    return cycleData;
   },
 
   /**
@@ -95,10 +106,21 @@ export const batteryService = {
       return cycle;
     }
 
-    const response = await apiClient.get<CycleSnapshot>(
+    const response = await apiClient.get<{ success: boolean; data: any }>(
       API_ENDPOINTS.CYCLE_DETAILS(imei, cycleNumber)
     );
-    return response.data;
+    const cycleData = response.data.data;
+
+    // Parse alert_details if it's a string
+    if (typeof cycleData.alert_details === 'string') {
+      try {
+        cycleData.alert_details = JSON.parse(cycleData.alert_details);
+      } catch (e) {
+        cycleData.alert_details = { warnings: [], protections: [] };
+      }
+    }
+
+    return cycleData;
   },
 };
 
