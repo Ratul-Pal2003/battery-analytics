@@ -124,4 +124,4 @@ function generateTempDistribution(samplingRate: number): Record<string, number> 
 // NOTE: Using mock data because real API has SSL certificate issues (ERR_CERT_COMMON_NAME_INVALID)
 // The API works (verified with curl -k) but browsers reject the invalid SSL certificate
 // This is a server-side issue that Zenfinity needs to fix, or will be resolved after deployment
-export const USE_MOCK_DATA = true; // Set to false to use real API
+export const USE_MOCK_DATA = false; // Set to false to use real API
