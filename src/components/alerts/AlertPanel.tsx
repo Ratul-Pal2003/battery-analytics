@@ -228,7 +228,7 @@ export function AlertPanel() {
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Data Points</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.data_points_count.toLocaleString()}
+            {(currentCycle.data_points_count ?? 0).toLocaleString()}
           </p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 text-center">

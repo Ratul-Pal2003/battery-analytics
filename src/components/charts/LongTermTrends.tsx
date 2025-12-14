@@ -3,6 +3,7 @@ import { useD3 } from '../../hooks/useD3';
 import { useBatteryContext } from '../../context/BatteryContext';
 import { useCycleSnapshots } from '../../hooks/useCycleSnapshots';
 import { Card } from '../common/Card';
+import { safeToFixed } from '../../utils/formatters';
 import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { line, curveMonotoneX } from 'd3-shape';
@@ -350,25 +351,25 @@ export function LongTermTrends() {
             <div className="text-center">
               <p className="text-xs text-gray-500 font-medium uppercase">Initial SOH</p>
               <p className="text-2xl font-bold text-green-600 mt-1">
-                {stats?.firstSOH.toFixed(2)}%
+                {safeToFixed(stats?.firstSOH, 2)}%
               </p>
             </div>
             <div className="text-center">
               <p className="text-xs text-gray-500 font-medium uppercase">Current SOH</p>
               <p className="text-2xl font-bold text-amber-600 mt-1">
-                {stats?.lastSOH.toFixed(2)}%
+                {safeToFixed(stats?.lastSOH, 2)}%
               </p>
             </div>
             <div className="text-center">
               <p className="text-xs text-gray-500 font-medium uppercase">Degradation</p>
               <p className="text-2xl font-bold text-red-600 mt-1">
-                -{stats?.totalDegradation.toFixed(2)}%
+                -{safeToFixed(stats?.totalDegradation, 2)}%
               </p>
             </div>
             <div className="text-center">
               <p className="text-xs text-gray-500 font-medium uppercase">Avg/Cycle</p>
               <p className="text-2xl font-bold text-gray-900 mt-1">
-                -{stats?.avgDegradationPerCycle.toFixed(3)}%
+                -{safeToFixed(stats?.avgDegradationPerCycle, 3)}%
               </p>
             </div>
           </div>

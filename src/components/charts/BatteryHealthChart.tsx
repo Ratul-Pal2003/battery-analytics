@@ -6,6 +6,7 @@ import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { line } from 'd3-shape';
 import { select } from 'd3-selection';
+import { safeToFixed } from '../../utils/formatters';
 import 'd3-transition';
 
 /**
@@ -317,25 +318,25 @@ export function BatteryHealthChart() {
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg SOC</p>
           <p className="text-2xl font-bold text-green-600 mt-1">
-            {chartData?.soc.average.toFixed(1)}%
+            {safeToFixed(chartData?.soc.average, 1)}%
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">SOC Range</p>
           <p className="text-lg font-semibold text-gray-900 mt-1">
-            {chartData?.soc.min.toFixed(0)}% - {chartData?.soc.max.toFixed(0)}%
+            {safeToFixed(chartData?.soc.min, 0)}% - {safeToFixed(chartData?.soc.max, 0)}%
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg SOH</p>
           <p className="text-2xl font-bold text-amber-600 mt-1">
-            {chartData?.soh.average.toFixed(1)}%
+            {safeToFixed(chartData?.soh.average, 1)}%
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">SOH Drop</p>
           <p className="text-lg font-semibold text-gray-900 mt-1">
-            {chartData?.soh.drop.toFixed(2)}%
+            {safeToFixed(chartData?.soh.drop, 2)}%
           </p>
         </div>
       </div>

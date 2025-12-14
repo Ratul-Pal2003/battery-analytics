@@ -6,6 +6,7 @@ import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { area, line, curveMonotoneX } from 'd3-shape';
 import { select } from 'd3-selection';
+import { safeToFixed } from '../../utils/formatters';
 import 'd3-transition';
 
 /**
@@ -317,25 +318,25 @@ export function PerformanceChart() {
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Total Distance</p>
           <p className="text-2xl font-bold text-purple-600 mt-1">
-            {currentCycle.total_distance.toFixed(2)} km
+            {safeToFixed(currentCycle.total_distance, 2)} km
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg Speed</p>
           <p className="text-2xl font-bold text-blue-600 mt-1">
-            {currentCycle.average_speed.toFixed(1)} km/h
+            {safeToFixed(currentCycle.average_speed, 1)} km/h
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Max Speed</p>
           <p className="text-2xl font-bold text-indigo-600 mt-1">
-            {currentCycle.max_speed.toFixed(1)} km/h
+            {safeToFixed(currentCycle.max_speed, 1)} km/h
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Duration</p>
           <p className="text-2xl font-bold text-gray-900 mt-1">
-            {currentCycle.cycle_duration_hours.toFixed(1)}h
+            {safeToFixed(currentCycle.cycle_duration_hours, 1)}h
           </p>
         </div>
       </div>

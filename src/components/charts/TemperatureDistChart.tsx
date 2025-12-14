@@ -4,6 +4,7 @@ import { useCycleContext } from '../../context/CycleContext';
 import { Card } from '../common/Card';
 import { getTemperatureDistribution, getTemperatureColor } from '../../utils/dataTransformers';
 import { TEMPERATURE_SAMPLING_RATES } from '../../utils/constants';
+import { safeToFixed } from '../../utils/formatters';
 import type { TemperatureSamplingRate } from '../../types/battery';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
@@ -189,13 +190,13 @@ export function TemperatureDistChart() {
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg Temperature</p>
           <p className="text-2xl font-bold text-gray-900 mt-1">
-            {currentCycle.average_temperature.toFixed(1)}°C
+            {safeToFixed(currentCycle.average_temperature, 1)}°C
           </p>
         </div>
         <div className="text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Total Time</p>
           <p className="text-2xl font-bold text-gray-900 mt-1">
-            {totalMinutes.toFixed(0)} min
+            {safeToFixed(totalMinutes, 0)} min
           </p>
         </div>
         <div className="text-center">
