@@ -1,6 +1,6 @@
 // Application constants
-
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://zenfinity-intern-api-104290304048.europe-west1.run.app';
+// Use relative URL for production (Netlify proxy) or env var for development
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 // Authorized battery IMEIs
 export const AUTHORIZED_IMEIS = [

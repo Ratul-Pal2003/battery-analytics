@@ -10,7 +10,14 @@
   # Node version
   node_version = "24.12.0"
 
-# Redirect all requests to index.html for client-side routing
+# Proxy API requests to avoid CORS issues
+[[redirects]]
+  from = "/api/*"
+  to = "https://zenfinity-intern-api-104290304048.europe-west1.run.app/api/:splat"
+  status = 200
+  force = true
+
+# Redirect all other requests to index.html for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
