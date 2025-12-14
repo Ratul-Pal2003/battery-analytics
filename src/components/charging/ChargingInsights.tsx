@@ -1,5 +1,6 @@
 import { useCycleContext } from '../../context/CycleContext';
 import { Card } from '../common/Card';
+import { safeToFixed, safeNumber } from '../../utils/formatters';
 
 /**
  * Charging Insights Component
@@ -16,14 +17,17 @@ export function ChargingInsights() {
     );
   }
 
-  const { charging_instances_count, average_charge_start_soc, average_soc } = currentCycle;
+  const charging_instances_count = safeNumber(currentCycle.charging_instances_count, 0);
+  const average_charge_start_soc = safeNumber(currentCycle.average_charge_start_soc, 0);
+  const average_soc = safeNumber(currentCycle.average_soc, 0);
+  const cycle_duration_hours = safeNumber(currentCycle.cycle_duration_hours, 1);
 
   // Calculate charging efficiency metrics
   const socGainPerCharge = charging_instances_count > 0
     ? (100 - average_charge_start_soc) / charging_instances_count
     : 0;
 
-  const chargingFrequency = charging_instances_count / currentCycle.cycle_duration_hours;
+  const chargingFrequency = charging_instances_count / cycle_duration_hours;
 
   return (
     <Card
@@ -44,7 +48,7 @@ export function ChargingInsights() {
                 {charging_instances_count}
               </p>
               <p className="text-xs text-indigo-600">
-                {chargingFrequency.toFixed(2)} charges/hour
+                {safeToFixed(chargingFrequency, 2)} charges/hour
               </p>
             </div>
             <div className="bg-indigo-500 rounded-full p-4">
@@ -73,7 +77,7 @@ export function ChargingInsights() {
                 Avg Charge Start
               </p>
               <p className="text-4xl font-bold text-cyan-900 mb-1">
-                {average_charge_start_soc.toFixed(0)}%
+                {safeToFixed(average_charge_start_soc, 0)}%
               </p>
               <p className="text-xs text-cyan-600">
                 SOC when charging begins
@@ -146,21 +150,21 @@ export function ChargingInsights() {
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">SOC Gain</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            +{socGainPerCharge.toFixed(1)}%
+            +{safeToFixed(socGainPerCharge, 1)}%
           </p>
           <p className="text-xs text-gray-500 mt-1">per charge</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Avg SOC</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {average_soc.toFixed(1)}%
+            {safeToFixed(average_soc, 1)}%
           </p>
           <p className="text-xs text-gray-500 mt-1">during cycle</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3 text-center">
           <p className="text-xs text-gray-500 font-medium uppercase">Duration</p>
           <p className="text-lg font-bold text-gray-900 mt-1">
-            {currentCycle.cycle_duration_hours.toFixed(1)}h
+            {safeToFixed(cycle_duration_hours, 1)}h
           </p>
           <p className="text-xs text-gray-500 mt-1">total time</p>
         </div>
@@ -194,7 +198,7 @@ export function ChargingInsights() {
               {charging_instances_count > 5 && "High frequency charging - ensure charger is functioning properly."}
             </p>
             <p className="text-xs text-blue-700 mt-2">
-              Average charge starts at {average_charge_start_soc.toFixed(0)}% SOC
+              Average charge starts at {safeToFixed(average_charge_start_soc, 0)}% SOC
               {average_charge_start_soc < 20 && " (⚠️ Low - consider charging earlier)"}
               {average_charge_start_soc >= 20 && average_charge_start_soc < 40 && " (✓ Good range)"}
               {average_charge_start_soc >= 40 && " (💡 Optimal - prevents deep discharge)"}
