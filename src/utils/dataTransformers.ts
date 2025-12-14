@@ -17,7 +17,7 @@ export function getTemperatureDistribution(
   snapshot: CycleSnapshot,
   samplingRate: TemperatureSamplingRate
 ): TemperatureDataPoint[] {
-  let distribution: Record<string, number>;
+  let distribution: Record<string, number> | null | undefined;
 
   switch (samplingRate) {
     case 5:
@@ -34,6 +34,11 @@ export function getTemperatureDistribution(
       break;
     default:
       distribution = snapshot.temperature_dist_10deg;
+  }
+
+  // Handle null/undefined distribution
+  if (!distribution || typeof distribution !== 'object') {
+    return [];
   }
 
   // Transform to array format for D3
